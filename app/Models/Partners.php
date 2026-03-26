@@ -22,4 +22,4 @@ class partners extends Model
         return $this->belongsTo(Files::class, 'file_id');
     }
 }
-adasdadasdadadad
+
