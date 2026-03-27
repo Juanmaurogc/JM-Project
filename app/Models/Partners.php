@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Files;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Laravel\Pail\Files;
 
-class partners extends Model
+class Partners extends Model
 {
     use SoftDeletes;
 
@@ -19,7 +19,7 @@ class partners extends Model
 
     public function file(): BelongsTo
     {
-        return $this->belongsTo(Files::class, 'file_id');
+        return $this->belongsTo(Files::class, 'image_file_id');
     }
 }
 

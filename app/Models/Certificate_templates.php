@@ -6,9 +6,9 @@ use App\Models\Certificates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Laravel\Pail\Files;
+use Laravel\Models\Files;
 
-class certificate_templates extends Model
+class Certificate_templates extends Model
 {
     protected $fillable = [
         'bg_image_file_id',
@@ -23,7 +23,7 @@ class certificate_templates extends Model
 
     public function file(): BelongsTo
     {
-        return $this->belongsTo(Files::class, 'file_id');
+        return $this->belongsTo(Files::class, 'bg_image_file_id');
     }
 
     public function certificates(): HasMany

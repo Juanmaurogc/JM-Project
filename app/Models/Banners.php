@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Laravel\Pail\Files;
+use Laravel\Models\Files;
 
 class Banners extends Model
 {
@@ -13,12 +13,13 @@ class Banners extends Model
 
     protected $fillable = [
         'image_file_id',
+        'is_active',
         'start_date', 
         'end_date',  
     ];
 
     public function file(): BelongsTo
     {
-        return $this->belongsTo(Files::class, 'file_id');
+        return $this->belongsTo(Files::class, 'image_file_id');
     }
 }

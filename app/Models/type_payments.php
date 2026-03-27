@@ -6,7 +6,7 @@ use App\Models\Payments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class type_payments extends Model
+class Type_payments extends Model
 {
     protected $fillable = [
         'name',

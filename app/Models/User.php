@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Enrollments;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +20,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'role_id',
         'name',
         'email',
         'password',
@@ -33,6 +35,22 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
+    public function type_role()
+    {
+        return $this->belongsTo(Type_roles::class, 'role_id');
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollments::class, 'user_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payments::class, 'user_id');
+    }
 
     /**
      * Get the attributes that should be cast.

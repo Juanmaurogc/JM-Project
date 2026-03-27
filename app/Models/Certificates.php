@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Models\Enrollments;
+use App\Models\Certificate_templates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Laravel\Pail\Files;
+use Laravel\Models\Files;
 
 class Certificates extends Model
 {
@@ -20,13 +21,18 @@ class Certificates extends Model
         'issue_date' => 'date',
     ];
 
+    public function template(): BelongsTo
+    {
+        return $this->belongsTo(Certificate_templates::class, 'template_id');
+    }
+
     public function file(): BelongsTo
     {
         return $this->belongsTo(Files::class, 'file_id');
     }
 
-    public function enrollments(): BelongsTo
+    public function enrollment(): BelongsTo
     {
-        return $this->belongsTo(Enrollments::class, 'file_id');
+        return $this->belongsTo(Enrollments::class, 'enrollment_id');
     }
 }

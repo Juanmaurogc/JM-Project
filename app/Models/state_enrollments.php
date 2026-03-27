@@ -6,7 +6,7 @@ use App\Models\Enrollments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class state_enrollments extends Model
+class State_enrollments extends Model
 {
     protected $fillable = [
         'name',

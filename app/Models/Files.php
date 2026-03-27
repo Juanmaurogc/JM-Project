@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
-class files extends Model
+class Files extends Model
 {
     protected $fillable = [
         'file_path', 
@@ -20,19 +20,19 @@ class files extends Model
         'size', 
     ];
 
-    public function getFullUrlAttribute(): string
-    {
-        return Storage::url($this->file_path);
-    }
+    // public function getFullUrlAttribute(): string
+    // {
+    //     return Storage::url($this->file_path);
+    // }
 
     public function banners(): HasMany
     {
-        return $this->hasMany(Banners::class, 'file_id');
+        return $this->hasMany(Banners::class, 'image_file_id');
     }
 
     public function partners(): HasMany
     {
-        return $this->hasMany(Partners::class, 'file_id');
+        return $this->hasMany(Partners::class, 'image_file_id');
     }
 
     public function speakers(): HasMany
@@ -47,6 +47,6 @@ class files extends Model
 
     public function certificateTemplates(): HasMany
     {
-        return $this->hasMany(Certificate_templates::class, 'file_id');
+        return $this->hasMany(Certificate_templates::class, 'bg_image_file_id');
     }
 }

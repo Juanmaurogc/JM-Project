@@ -6,7 +6,7 @@ use App\Models\Trainings;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class type_trainings extends Model
+class Type_trainings extends Model
 {
     protected $fillable = [
         'name',

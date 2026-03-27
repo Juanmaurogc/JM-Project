@@ -2,55 +2,57 @@
 
 namespace App\Models;
 
-use App\Models\Enrollments;
+use App\Models\enrollments;
 use App\Models\Modules;
 use App\Models\Speakers;
+use App\Models\State_enrollments;
+use App\Models\Trainings;
 use App\Models\Type_trainings;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class enrollments extends Model
+class Enrollments extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 
-        'description', 
-        'training_type_id', 
-        'presentation_date_time', 
-        'min_enrollments', 
-        'max_enrollments'
+        'user_id', 
+        'training_id', 
+        'enrollment_state_id', 
+        'is_completed', 
     ];
-
+    
     protected $casts = [
-        'presentation_date_time' => 'datetime',
+        'is_completed' => 'boolean',
     ];
 
-    public function type(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Type_trainings::class, 'training_type_id');
+        return $this->belongsTo(User::class);
     }
 
-    public function speakers(): BelongsToMany
+    public function training(): BelongsTo
     {
-        return $this->belongsToMany(Speakers::class, 'training_speaker');
+        return $this->belongsTo(Trainings::class);
     }
 
-    public function modules(): BelongsToMany
+    public function enrollmentState(): BelongsTo
     {
-        return $this->belongsToMany(Modules::class, 'module_training')->withPivot('sort_order'); 
+        return $this->belongsTo(State_enrollments::class, 'enrollment_state_id');
     }
 
-    public function enrollments(): HasMany
+    public function payments(): BelongsToMany
     {
-        return $this->hasMany(Enrollments::class);
+        return $this->belongsToMany(Payments::class, 'enrollment_payments');
     }
-
-    public function payments()
+    
+    public function certificates(): HasOne
     {
-        return $this->belongsToMany(Payment::class, 'enrollment_payments');
+        return $this->hasOne(Certificates::class);
     }
-}
+}   
